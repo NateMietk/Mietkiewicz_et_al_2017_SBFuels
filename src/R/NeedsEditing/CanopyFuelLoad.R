@@ -1,8 +1,7 @@
 library(sciplot); library(agricolae); library(ggplot2); library(lattice); library(AICcmodavg); library(ez)
-setwd("~/Dropbox/PhD Program/FieldSeason_2013/2013_Datasheets/FuelsSites_2013/Fuel_Output_Sheets/SFuels_R")
 CFL <- read.csv("data/CFL.csv")
-CC <- read.csv("~/Dropbox/PhD Program/FieldSeason_2013/2013_Datasheets/FuelsSites_2013/Fuel_Output_Sheets/SFuels_R/CC.csv")
-source('~/Dropbox/PhD Program/FieldSeason_2013/2013_Datasheets/FuelsSites_2013/Fuel_Output_Sheets/SFuels_R/NestAnovaPerm.txt')
+CC <- read.csv("data/CC.csv")
+source("data/NestAnovaPerm.txt")
 #attach(CFL)
 
 #Convert kg/m2 to MG/ha
