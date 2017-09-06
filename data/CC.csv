@@ -1,7 +1,7 @@
 Year,Age,Site,CanopyOpen
 1940,Old,13-12A,10.1
 1940,Old,14-F03,14.4
-1960,Old,13-61B,10.0
+1960,Old,13-61B,10
 1960,Old,14-F04,16.8
 1960,Old,14-F05,17.1
 1990,Old,13-42A,11.5
@@ -10,7 +10,7 @@ Year,Age,Site,CanopyOpen
 2000,Old,13-50C,12.3
 2000,Old,13-57A,15.8
 2000,Old,13-58A,12.5
-2000,Old,13-49B,9.0
+2000,Old,13-49B,9
 2010,Old,13-09C,7.6
 2010,Old,13-100A,10.4
 2010,Old,13-101A,13.5
@@ -27,3 +27,5 @@ Endemic,Old,13-107A,10.6
 Endemic,Young,13-3A,5.3
 Endemic,Young,13-20A,6.4
 Endemic,Young,13-81A,8.9
+1940,Young,0,0
+1960,Young,0,0
