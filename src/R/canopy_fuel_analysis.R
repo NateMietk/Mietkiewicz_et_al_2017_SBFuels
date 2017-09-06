@@ -11,20 +11,23 @@ cfl <- fread("data/CFL.csv") %>%
   mutate(AFCL = AFCL*10,
          LCW = LCW*10,
          DCW = DCW*10,
-         LiDe = ifelse(Status == "Li", "Live", "Dead"))
+         LiDe = ifelse(Status == "Li", "Live", "Dead"))  %>%
+  filter(S.F == "S" & Plot != "0")
+
+# Prep canopy closure for plotting
 cc <- fread("data/CC.csv") %>%
   group_by(Site, Year, Age) %>%
   summarise_all(c("sum")) %>%
   ungroup()
+
 cc <- cc %>%
   select(-Site) %>%
   group_by(Year, Age) %>%
   summarise_all(c("mean", "sd")) %>%
   ungroup()
 
-# Prep the data
+# Prep data for the AOV and TukeyHSD 
 pfuel <- cfl %>%
-  filter(S.F == "S" & Plot != "0") %>%
   group_by(Site, Year, Age, Plot) %>%
   select(CBD, CBH, AFCL, LCW, DCW, BA_Li, BA_Gr, BA_Ye, BA_Nd, BA_Tw, BA_Br, BA_Sn, BA_De,
          LiFol, DeFol, Li.1hr, De.1hr, Li.10hr, De.10hr, Li.100hr, De.100hr) %>%
@@ -34,12 +37,15 @@ pfuel <- cfl %>%
          ba_g50pct_nd = BA_Gr_mean + BA_Ye_mean + BA_Nd_mean,
          ba_l50pct_tw = BA_Br_mean + BA_Sn_mean)
 
-pstat <- cfl %>%
-  filter(S.F == "S" & Plot != "0") %>%
+# Prep data for plotting
+pstat <- cfl
   group_by(Site, Year, Age) %>%
   select(CBD, CBH, AFCL, LCW, DCW, BA_Li, BA_Gr, BA_Ye, BA_Nd, BA_Tw, BA_Br, BA_Sn, BA_De,
          LiFol, DeFol, Li.1hr, De.1hr, Li.10hr, De.10hr, Li.100hr, De.100hr) %>%
-  summarise_all(c("sum")) %>%
+  summarise_all(c("sum"))  %>%
+  ungroup()
+
+  pstat <- pstat %>%
   group_by(Year, Age) %>%
   summarise_all(c("mean", "sd")) %>%
   ungroup() %>%
@@ -74,10 +80,8 @@ p4 <- ggfunction(pstat, "ba_l50pct_tw_mean", "ba_l50pct_tw_sd", "ba_l50pct_tw_me
         legend.title = element_blank(),
         legend.position=c(0.9, 0.7))
 
-grid.arrange(p1, p2, p3, p4, ncol = 1)
-g <- arrangeGrob(p1, p2, p3, p4, ncol = 1)
-
-ggsave(filename = "results/Figure2.jpg", g, height = 8, width = 6, 
+ggsave(filename = "results/Figure2.jpg", arrangeGrob(p1, p2, p3, p4, ncol = 1),
+       height = 8, width = 6, 
        scale = 3, units = "cm", dpi=1200)
 
 # Create Figure 3
@@ -122,19 +126,10 @@ p12 <- ggfunction(cc, "mean", "sd", "mean + sd", "l", "TRUE") +
         legend.title = element_blank(),
         legend.position=c(0.25, 0.82))
 
-grid.arrange(p1, p5, p9,
-             p2, p6, p10,
-             p3, p7, p11,
-             p4, p8, p12,
-             ncol = 3)
-
-g <- arrangeGrob(p1, p5, p9,
-                 p2, p6, p10,
-                 p3, p7, p11,
-                 p4, p8, p12,
-                 ncol = 3)
-
-ggsave(filename = "results/Figure3.jpg", g, height = 9, width = 10, 
+ggsave(filename = "results/Figure3.jpg", 
+       arrangeGrob(p1, p5, p9, p2, p6, p10, 
+                   p3, p7, p11, p4, p8, p12,ncol = 3),
+       height = 9, width = 10, 
        scale = 2.75, units = "cm", dpi=1200)
 
 # geom_text(data = aov.models$LiFol_sum$groups, 
