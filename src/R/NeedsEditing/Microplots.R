@@ -4,9 +4,7 @@ library(agricolae)
 
 par(mfrow = c(3,1))
 
-setwd("~/Dropbox/PhD Program/FieldSeason_2013/2013_Datasheets/FuelsSites_2013/Fuel_Output_Sheets/SFuels_R")
-
-
+setwd("data/SFuels_R")
 
 # Down Fuel Load abundances (Total Count per site)
 pdf(file="Surface_Fuelbed_load.pdf", width = 5, height = 7)
@@ -42,4 +40,3 @@ axis(side=1, labels=F, at=bg.fuelbed$xvals[c(1,3,5:12)])
 
 par(op)
 dev.off()
-detach(SDLFL)

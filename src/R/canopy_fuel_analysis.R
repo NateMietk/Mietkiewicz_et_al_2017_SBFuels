@@ -59,8 +59,8 @@ aov.models <- pfuel %>%
 
 # Plot the data
 # Create generic ggplot function as a wrapper
-ggfunction <- function(d, i, j, ermax){
-  ggplot(d, aes_string(x = "Year", y = i, fill = "Age")) +
+ggfunction <- function(d, i, j, ermax, a, text){
+  p <- ggplot(d, aes_string(x = "Year", y = i, fill = "Age")) +
     geom_bar(colour="black", 
              stat = "identity", position = position_dodge()) +
     geom_errorbar(aes_string(ymax = ermax, ymin = ermax),
@@ -69,6 +69,13 @@ ggfunction <- function(d, i, j, ermax){
                    position = position_dodge(.9)) +
     theme_pub() +
     scale_fill_manual(values=c("Old" = "gray90", "Young" = "gray23"))
+  if(text == "TRUE"){
+    y <- ggplot_build(p)$data[[2]]$ymax
+    y[is.na(y)] <- 0
+    ymax <- max(y)
+    p <- p + geom_text(aes(x = 1, y = ymax, 
+                           hjust = 0.95, vjust = 0.95, label=paste0("(", a, ")")), 
+                       check_overlap = TRUE, stat = 'identity')}
 }
 
 #Create Figure 2
@@ -100,90 +107,66 @@ ggsave(filename = "results/Figure2.jpg", g, height = 8, width = 6,
        scale = 3, units = "cm", dpi=1200)
 
 # Create Figure 3
-p1 <- ggfunction(pstat, "LiFol_mean", "LiFol_sd", "LiFol_mean + LiFol_sd") + 
-  geom_text(aes(x = 1, y = 115, hjust = 0.95, vjust = 0.95, label="(a)"), 
-            check_overlap = TRUE, stat = 'identity') +
+p1 <- ggfunction(pstat, "LiFol_mean", "LiFol_sd", "LiFol_mean + LiFol_sd", "a", "TRUE") + 
   xlab("") + ylab("Live foliage (Mg/ha)") +
   theme(axis.text.x = element_blank(),
         legend.position="none")
 
-p2 <- ggfunction(pstat, "Li.1hr_mean", "Li.1hr_sd", "Li.1hr_mean + Li.1hr_sd") + 
-  geom_text(aes(x = 1, y = 70, hjust = 0.95, vjust = 0.95, label="(d)"), 
-            check_overlap = TRUE, stat = 'identity') +
+p2 <- ggfunction(pstat, "Li.1hr_mean", "Li.1hr_sd", "Li.1hr_mean + Li.1hr_sd", "d", "TRUE") + 
   xlab("") + ylab("Live 1hr (Mg/ha)") +
   theme(axis.text.x = element_blank(),
         legend.position="none")
 
-p3 <- ggfunction(pstat, "Li.10hr_mean", "Li.10hr_sd", "Li.10hr_mean + Li.10hr_sd") + 
-  geom_text(aes(x = 1, y = 90, hjust = 0.95, vjust = 0.95, label="(g)"), 
-            check_overlap = TRUE, stat = 'identity') +
+p3 <- ggfunction(pstat, "Li.10hr_mean", "Li.10hr_sd", "Li.10hr_mean + Li.10hr_sd", "g", "TRUE") + 
   xlab("") + ylab("Live 10hr (Mg/ha)") +
   theme(axis.text.x = element_blank(),
         legend.position="none")
 
-p4 <- ggfunction(pstat, "Li.100hr_mean", "Li.100hr_sd", "Li.100hr_mean + Li.100hr_sd") + 
-  geom_text(aes(x = 1, y = 120, hjust = 0.95, vjust = 0.95, label="(j)"), 
-            check_overlap = TRUE, stat = 'identity') +
+p4 <- ggfunction(pstat, "Li.100hr_mean", "Li.100hr_sd", "Li.100hr_mean + Li.100hr_sd", "j", "TRUE") + 
   xlab("Decades of spruce beetle outbreaks") + ylab("Live 100hr (Mg/ha)") +
   theme(axis.text.x = element_text(hjust = 0.5),
         legend.position="none")
 
-p5 <- ggfunction(pstat, "DeFol_mean", "DeFol_sd", "DeFol_mean + DeFol_sd") + 
-  geom_text(aes(x = 1, y = 4.8, hjust = 0.95, vjust = 0.95, label="(b)"), 
-            check_overlap = TRUE, stat = 'identity') +
+p5 <- ggfunction(pstat, "DeFol_mean", "DeFol_sd", "DeFol_mean + DeFol_sd", "b", "TRUE") + 
   xlab("") + ylab("Dead foliage (Mg/ha)") +
   theme(axis.text.x = element_blank(),
         legend.position="none")
 
-p6 <- ggfunction(pstat, "De.1hr_mean", "De.1hr_sd", "De.1hr_mean + De.1hr_sd") + 
-  geom_text(aes(x = 1, y = 6.1, hjust = 0.95, vjust = 0.95, label="(e)"), 
-            check_overlap = TRUE, stat = 'identity') +
+p6 <- ggfunction(pstat, "De.1hr_mean", "De.1hr_sd", "De.1hr_mean + De.1hr_sd", "e", "TRUE") + 
   xlab("") + ylab("Dead 1hr (Mg/ha)") +
   theme(axis.text.x = element_blank(),
         legend.position="none")
 
-p7 <- ggfunction(pstat, "De.10hr_mean", "De.10hr_sd", "De.10hr_mean + De.10hr_sd") + 
-  geom_text(aes(x = 1, y = 13, hjust = 0.95, vjust = 0.95, label="(h)"), 
-            check_overlap = TRUE, stat = 'identity') +
+p7 <- ggfunction(pstat, "De.10hr_mean", "De.10hr_sd", "De.10hr_mean + De.10hr_sd", "h", "TRUE") + 
   xlab("") + ylab("Dead 10hr (Mg/ha)") +
   theme(axis.text.x = element_blank(),
         legend.position="none")
 
-p8 <- ggfunction(pstat, "De.100hr_mean", "De.100hr_sd", "De.100hr_mean + De.100hr_sd") + 
-  geom_text(aes(x = 1, y = 8.5, hjust = 0.95, vjust = 0.95, label="(k)"), 
-            check_overlap = TRUE, stat = 'identity') +
+p8 <- ggfunction(pstat, "De.100hr_mean", "De.100hr_sd", "De.100hr_mean + De.100hr_sd", "k", "TRUE") + 
   xlab("Decades of spruce beetle outbreaks") + ylab("Dead 100hr (Mg/ha)") +
   theme(axis.text.x = element_text(hjust = 0.5),
         legend.position="none")
 
-p9 <- ggfunction(pstat, "CBH_mean", "CBH_sd", "CBH_mean + CBH_sd") + 
-  geom_text(aes(x = 1, y = 87, hjust = 0.95, vjust = 0.95, label="(c)"), 
-            check_overlap = TRUE, stat = 'identity') +
+p9 <- ggfunction(pstat, "CBH_mean", "CBH_sd", "CBH_mean + CBH_sd", "c", "TRUE") + 
   xlab("") + ylab("Canopy base height (m)") +
   theme(axis.text.x = element_blank(),
         legend.position="none")
 
-p10 <- ggfunction(pstat, "CBD_mean", "CBD_sd", "CBD_mean + CBD_sd") + 
-  geom_text(aes(x = 1, y = 1.5, hjust = 0.95, vjust = 0.95, label="(f)"), 
-            check_overlap = TRUE, stat = 'identity') +
+p10 <- ggfunction(pstat, "CBD_mean", "CBD_sd", "CBD_mean + CBD_sd", "f", "TRUE") + 
   xlab("") + ylab("Canopy bulk density (kg/m2)") +
   theme(axis.text.x = element_blank(),
         legend.position="none")
 
-p11 <- ggfunction(pstat, "AFCL_mean", "AFCL_sd", "AFCL_mean + AFCL_sd") + 
-  geom_text(aes(x = 1, y = 180, hjust = 0.95, vjust = 0.95, label="(i)"), 
-            check_overlap = TRUE, stat = 'identity') +
+p11 <- ggfunction(pstat, "AFCL_mean", "AFCL_sd", "AFCL_mean + AFCL_sd", "i", "TRUE") + 
   xlab("") + ylab("Available crown fuel load (Mg/ha)") +
   theme(axis.text.x = element_blank(),
         legend.position="none")
 
-p12 <- ggfunction(cc, "mean", "sd", "mean + sd") + 
-  geom_text(aes(x = 6.25, y = 35, hjust = 0.95, vjust = 0.95, label="(l)"), 
-            check_overlap = TRUE, stat = 'identity') +
+p12 <- ggfunction(cc, "mean", "sd", "mean + sd", "l", "TRUE") +
   xlab("Decades of spruce beetle outbreaks") + ylab("Canopy openness (m)") +
   theme(axis.text.x = element_text(hjust = 0.5),
         legend.title = element_blank(),
-        legend.position=c(0.17, 0.83))
+        legend.position=c(0.25, 0.83))
 
 grid.arrange(p1, p5, p9,
              p2, p6, p10,

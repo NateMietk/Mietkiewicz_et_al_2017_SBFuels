@@ -4,9 +4,7 @@ library(agricolae)
 
 par(mfrow = c(3,1))
 
-setwd("~/Dropbox/PhD Program/FieldSeason_2013/2013_Datasheets/FuelsSites_2013/Fuel_Output_Sheets/SFuels_R")
-SDLFL <- read.csv("~/Dropbox/PhD Program/FieldSeason_2013/2013_Datasheets/FuelsSites_2013/Fuel_Output_Sheets/SFuels_R/SDLFL.csv")
-attach(SDLFL)
+SDLFL <- read.csv("data/SDLFL.csv")
 
 SDLFL$SB.Age <- with(SDLFL, paste0(Year, Age))
 SDLFL$Duff <- SDLFL$Duff*100

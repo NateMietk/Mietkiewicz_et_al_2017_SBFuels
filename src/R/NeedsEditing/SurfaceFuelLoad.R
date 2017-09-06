@@ -1,10 +1,8 @@
 library(sciplot)
 library(agricolae)
 
-setwd("~/Dropbox/PhD Program/Dissertation_Research/2_Fuels/Fuel_Output_Sheets/SFuels_R/")
-source('~/Dropbox/PhD Program/Dissertation_Research/2_Fuels/Fuel_Output_Sheets/SFuels_R/rand_anova.txt')
-SFL <- read.csv("~/Dropbox/PhD Program/Dissertation_Research/2_Fuels/Fuel_Output_Sheets/SFuels_R/SFL.csv")
-MP <- read.csv("~/Dropbox/PhD Program/Dissertation_Research/2_Fuels/Fuel_Output_Sheets/SFuels_R/MicroPlots.csv")
+SFL <- read.csv("data/SFL.csv")
+MP <- read.csv("data/MicroPlots.csv")
 
 par(mfrow = c(3,2))
 
