@@ -47,13 +47,13 @@ pstat <- cfl
 
   pstat <- pstat %>%
   group_by(Year, Age) %>%
-  summarise_all(c("mean", "sd")) %>%
+  summarise_all(c("mean", "se")) %>%
   ungroup() %>%
   mutate(sb_age = paste0(Year, Age),
          ba_g50pct_nd_mean = BA_Gr_mean + BA_Ye_mean + BA_Nd_mean,
          ba_l50pct_tw_mean = BA_Br_mean + BA_Sn_mean,
-         ba_g50pct_nd_sd = BA_Gr_sd + BA_Ye_sd + BA_Nd_sd,
-         ba_l50pct_tw_sd = BA_Br_sd + BA_Sn_sd)
+         ba_g50pct_nd_se = BA_Gr_se + BA_Ye_se + BA_Nd_se,
+         ba_l50pct_tw_se = BA_Br_se + BA_Sn_se)
 
 # Create the ANOVA model and Tukey HSD tests
 aov.models <- pfuel %>%
@@ -63,10 +63,25 @@ aov.models <- pfuel %>%
   map(~ aov(value ~ sb_age + Site/Plot, data = .x)) %>%
   map(HSD.test, trt = 'sb_age', alpha = 0.05)
 
+aov.models <- lapply(lapply(lapply(aov.models, '[[', 'groups'), 
+                     function(x) with(x, data.frame(trt = rownames(x), 
+                                                    means = x[,1], 
+                                                    groups = x[,2]))),
+                     function(x) with(x, x[order(x$trt),]))
+
 # Plot the data
 #Create Figure 2
-p1 <- ggfunction(pstat, "BA_Li_mean", "BA_Li_sd", "BA_Li_mean + BA_Li_sd", "a", "FALSE") + 
-  xlab("") + ylab("Basal Area (m2/ha)") + ggtitle("(a) Live")
+p1 <- ggfunction(pstat, "BA_Li_mean", "BA_Li_se", "BA_Li_mean + BA_Li_se", "a", "FALSE") + 
+  xlab("") + ylab("Basal Area (m2/ha)") + ggtitle("(a) Live") +
+  geom_text(aes(x = aov.models$BA_Li_se$trt, 
+                y = aov.models$BA_Li_se, 
+                label = aov.models$BA_Li_mean$groups), 
+            vjust = -1, position = position_dodge(width = 0.9))
+  
+
+
+
+  geom_text(aes(label=aov.models$BA_Li_mean$groups), , vjust=-0.25)
 
 p2 <- ggfunction(pstat, "ba_g50pct_nd_mean", "ba_g50pct_nd_sd", "ba_g50pct_nd_mean + ba_g50pct_nd_sd", "a", "FALSE") + 
   xlab("") + ylab("Basal Area (m2/ha)") + ggtitle("(b) > 50% needle retention")
