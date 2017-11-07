@@ -1,4 +1,4 @@
-Year,Age,Site,Plot,Plot.size,Species,Status,S.F,LiFol,DeFol,Li.1hr,De.1hr,Li.10hr,De.10hr,Li.100hr,De.100hr,CBH,LCW,DCW,AFCL,CBD,BA_Li,BA_Gr,BA_Ye,BA_Nd,BA_Tw,BA_Br,BA_Sn,BA_De
+year,age,site,plot,plot_size,spp,status,sf,lifol,defol,li1hr,de1hr,li10hr,de10hr,li100hr,de100hr,cbh,lcw,dcw,acfl,cbd,ba_li,ba_gr,ba_ye,ba_nd,ba_tw,ba_br,ba_sn,ba_de
 1940,Young,na,1,100,na,na,S,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 1960,Young,na,1,100,na,na,S,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 1940,Old,13-12A,1,100,PIEN,Br,S,0,0,0,0.009613181,0,0.108242633,0,0.002977604,0.4,0,0.012083368,0.000480659,3.14E-05,0,0,0,0,0,5.726295,0,0
