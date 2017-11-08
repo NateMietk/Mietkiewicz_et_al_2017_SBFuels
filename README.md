@@ -9,43 +9,50 @@ Over the past 30 years, disturbances have increased in size and frequency across
 
 **canopybulkdensity.csv** - Vertical canopy bulk denisty estimates for each age/outbreak class aggregated into 0.25m bins.
 
+
 **canopycover.csv** - Canopy openness measurements for each site across all age/outbreak classes.
+-  year = The decade of epidemic spruce beetle attack
+-  age = The relative age of spruce-fir stand. 
+-  site = The unique id for the site
+-  canopyopen = The percent of canopy openness
+
 
 **canopyfuelload.csv** - All canopy fuel load measurements for each plot, site, age, and outbreak class.  The abbreviations to cell headers are:
--  Year = The decade of epidemic spruce beetle attack
--  Age = The relative age of spruce-fir stand. 
--  Site = The unique id for the site
--  Plot = The subplot contained within the each site.
--  Plot.Size = The plot size in m2.
--  Species = The species of tree.  PIEN = englemnann spruce; ABLA = subalpine fir; PICO = lodgepole pine.
--  Status = A qualitative assessment of the relative stage of spruce betle attack.  See table 1 for more detail.
--  S.F = Whether the tree was standing (S) or fallen (F)
--  LiFol = Canopy bulk density of live foliage (Mg/ha)
--  DeFol = Canopy bulk density of dead foliage (Mg/ha)
--  Li.1hr = Canopy bulk density of live 1-hour fuels (Mg/ha)
--  De.1hr = Canopy bulk density of dead 1-hour fuels (Mg/ha)
--  Li.10hr = Canopy bulk density of live 10-hour fuels (Mg/ha)
--  De.10hr = Canopy bulk density of dead 10-hour fuels (Mg/ha)
--  Li.100hr = Canopy bulk density of live 100-hour fuels (Mg/ha)
--  De.100hr = Canopy bulk density of dead 100-hour fuels (Mg/ha)
--  CBH = Canopy base height (m)
--  LCW = Live crown weight (kg/m2)
--  DCW = Dead crown weight (kg/m2)
--  ACFL = Available crown fuel load (Mg/ha)
--  BA_Li = Basal area of live class
--  BA_Gr = Basal area of green class
--  BA_Ye = Basal area of yellow class
--  BA_Nd = Basal area of needle class
--  BA_Tw = Basal area of twig class
--  BA_Br = Basal area of branches class
--  BA_Sn = Basal area of snag class
--  BA_De = Basal area of dead class
+-  year = The decade of epidemic spruce beetle attack
+-  age = The relative age of spruce-fir stand. 
+-  site = The unique id for the site
+-  plot = The plot contained within the each site.
+-  plot_size = The plot size in m2.
+-  spp = The species of tree.  PIEN = englemnann spruce; ABLA = subalpine fir; PICO = lodgepole pine.
+-  status = A qualitative assessment of the relative stage of spruce betle attack.  See table 1 for more detail.
+-  sf = Whether the tree was standing (S) or fallen (F)
+-  lifol = Canopy bulk density of live foliage (Mg/ha)
+-  defol = Canopy bulk density of dead foliage (Mg/ha)
+-  li1hr = Canopy bulk density of live 1-hour fuels (Mg/ha)
+-  de1hr = Canopy bulk density of dead 1-hour fuels (Mg/ha)
+-  li10hr = Canopy bulk density of live 10-hour fuels (Mg/ha)
+-  de10hr = Canopy bulk density of dead 10-hour fuels (Mg/ha)
+-  li100hr = Canopy bulk density of live 100-hour fuels (Mg/ha)
+-  de100hr = Canopy bulk density of dead 100-hour fuels (Mg/ha)
+-  cbh = Canopy base height (m)
+-  lcw = Live crown weight (kg/m2)
+-  dcw = Dead crown weight (kg/m2)
+-  acfl = Available crown fuel load (Mg/ha)
+-  ba_li = Basal area of live class
+-  ba_gr = Basal area of green class
+-  ba_ye = Basal area of yellow class
+-  ba_nd = Basal area of needle class
+-  ba_tw = Basal area of twig class
+-  ba_br = Basal area of branches class
+-  ba_sn = Basal area of snag class
+-  ba_de = Basal area of dead class
+
 
 **coarsesurfacefuelload.csv** - All downed, coarse fuel load measurements for each plot, site, age, and outbreak class.  The abbreviations to cell headers are:
--  Year = The decade of epidemic spruce beetle attack
--  Age = The relative age of spruce-fir stand. 
--  Site = The unique id for the site
--  Plot = The subplot contained within the each site.
+-  year = The decade of epidemic spruce beetle attack
+-  age = The relative age of spruce-fir stand. 
+-  site = The unique id for the site
+-  plot = The plot contained within the each site.
 -  n1 = The number of 1-hour fuels
 -  n10 = The number of 10-hour fuels
 -  n100 = The number of 100-hour fuels
@@ -60,24 +67,28 @@ Over the past 30 years, disturbances have increased in size and frequency across
 -  dsqR1000 = The diameter squared of rotten 1000-hour fuels (m)
 -  flR1000 = The fuel load of rotten 1000-hour fuels (Mg/ha)
 
+
 **finesurfacefuelload.csv** - All downed, fine fuel load measurements for each plot, site, age, and outbreak class.  The abbreviations to cell headers are:
--  Year = The decade of epidemic spruce beetle attack
--  Age = The relative age of spruce-fir stand. 
--  Site = The unique id for the site
--  Plot = The subplot contained within the each site.
--  Duff = The duff layer depth (m)
--  Litter = The litter layer depth (m)
--  Fuelbed = The fuelbed depth (duff+litter; m)
+-  year = The decade of epidemic spruce beetle attack
+-  age = The relative age of spruce-fir stand. 
+-  site = The unique id for the site
+-  plot = The plot contained within the each site.
+-  duff = The duff layer depth (m)
+-  litter = The litter layer depth (m)
+-  fuelbed = The fuelbed depth (duff+litter; m)
+-  flduff = The duff layer fuel load (Mg/ha)
+-  fllitter = The litter layer fuel load (Mg/ha)
+-  flfuelbed = The fuelbed fuel load (Mg/ha)
 
 
 **microplot.csv** - Vegetation and bulk denisty from the microsite measurements for each plot, site, age, and outbreak class.  The abbreviations to cell headers are:
--  Year = The decade of epidemic spruce beetle attack
--  Age = The relative age of spruce-fir stand. 
--  Site = The unique id for the site
--  Plot = The subplot contained within the each site.
--  Line = Each line from the constructed Brown's line
--  BulkDensity = The bulk denisty of each respective vegetation type (Mg/ha)
--  Veg_Type = The specific live/dead vegetation class.
+-  year = The decade of epidemic spruce beetle attack
+-  age = The relative age of spruce-fir stand. 
+-  site = The unique id for the site
+-  plot = The plot contained within the each site.
+-  line = Each line from the constructed Brown's line
+-  bulkden = The bulk denisty of each respective vegetation type (Mg/ha)
+-  vegtype = The specific live/dead vegetation class.
     -  LS = Live shrub
     -  DS = Dead shrub
     -  LH = Live herb
@@ -85,8 +96,19 @@ Over the past 30 years, disturbances have increased in size and frequency across
     -  LG = Live grass
     -  DG = Dead grass
     -  Li = Litter
- - Veg.Cat = Generalized class based on Veg_Type
+ - vegcat = Generalized class based on vegtype
 
 
-
-
+**saplings.csv** - Vegetation and bulk denisty from the microsite measurements for each plot, site, age, and outbreak class.  The abbreviations to cell headers are:
+-  Yyear = The decade of epidemic spruce beetle attack
+-  age = The relative age of spruce-fir stand. 
+-  site = The unique id for the site
+-  plot = The plot contained within the each site.
+-  subplot = The subplots within the plot.
+-  spp = The species of tree.  PIEN = englemnann spruce; ABLA = subalpine fir; PICO = lodgepole pine.
+-  foliage = The foliage fuel load (Mg/ha)
+-  f1hr = The 1-hour fuel load (Mg/ha)
+-  f10hr = The 10-hour fuel load (Mg/ha)
+-  fl100hr = The 100-hr fuel load (Mg/ha)
+-  fl1000hr = The 1000-hour fuel load (Mg/ha)
+-  height = Height of tree (cm)
